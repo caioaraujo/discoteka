@@ -11,7 +11,7 @@ class Album(models.Model):
     nome = models.CharField(max_length=100)
     ano_lancamento = models.IntegerField()
     faixas = models.IntegerField()
-    artista = models.ForeignKey(Artista,)
+    artista = models.ForeignKey(Artista)
 
     class Meta:
         db_table = 'album'

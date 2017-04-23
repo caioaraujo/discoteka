@@ -10,3 +10,7 @@ class Artista(models.Model):
 
     class Meta:
         db_table = 'artista'
+
+    @staticmethod
+    def get_artista_por_id(pk):
+        return Artista.objects.filter(id=pk).first()

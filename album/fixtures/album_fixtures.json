@@ -1,0 +1,32 @@
+[
+  {
+    "model": "album.Album",
+    "pk": 1,
+    "fields": {
+      "nome": "Revolver",
+      "artista": 1,
+      "ano_lancamento": 1966,
+      "faixas": 14
+    }
+  },
+  {
+    "model": "album.Album",
+    "pk": 2,
+    "fields": {
+      "nome": "Sgt Pepper's Lonely Hearts Club Band",
+      "artista": 1,
+      "ano_lancamento": 1967,
+      "faixas": 13
+    }
+  },
+  {
+    "model": "album.Album",
+    "pk": 3,
+    "fields": {
+      "nome": "The Wall",
+      "artista": 2,
+      "ano_lancamento": 1979,
+      "faixas": 26
+    }
+  }
+]

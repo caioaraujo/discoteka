@@ -2,8 +2,9 @@ from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from artista.models import Artista as ArtistaModel
 from artista.views import Artista
-from discoteka.exceptions import RegistroRedundanteException, ValorObrigatorioException
+from discoteka.exceptions import RegistroRedundanteException, ValorObrigatorioException, RegistroNaoEncontradoException
 
 
 class UnitTests(TestCase):
@@ -57,3 +58,21 @@ class TestesIntegracao(APITestCase):
 
         for artista in items:
             self.assertEqual(genero, artista.get('genero'))
+
+    def test_busca_total(self):
+        resultado = self.client.get(self.BASE_URL)
+
+        self.assertEqual(resultado.status_code, status.HTTP_200_OK)
+        self.assertEqual(3, len(resultado.data))
+
+    def test_exclusao__nao_encontrado(self):
+        with self.assertRaises(RegistroNaoEncontradoException):
+            self.client.delete(self.BASE_URL + '/99')
+
+    def test_exclusao__sucesso(self):
+        resultado = self.client.delete(self.BASE_URL + '/3')
+        self.assertEqual(resultado.status_code, status.HTTP_200_OK)
+        self.assertEqual('Artista removido com sucesso', resultado.data.get('message'))
+
+        # Assegura nao encontrar o objeto na base apos exclusao
+        self.assertFalse(ArtistaModel.objects.filter(id=3).first())

@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 
 from artista.models import Artista as ArtistaModel
 from artista.serializers import ArtistaSerializer
-from discoteka.exceptions import RegistroRedundanteException, ValorObrigatorioException
+from discoteka.exceptions import RegistroRedundanteException, ValorObrigatorioException, RegistroNaoEncontradoException
 
 
 class Artista(APIView):
@@ -57,5 +57,17 @@ class Artista(APIView):
             raise RegistroRedundanteException("Artista ja cadastrado")
 
 
+class ArtistaId(APIView):
+
+    def delete(self, request, pk):
+
+        artista = ArtistaModel.get_artista_por_id(pk=pk)
+
+        if not artista:
+            raise RegistroNaoEncontradoException("Artista não encontrado")
+
+        artista.delete()
+
+        return Response({'message': 'Artista removido com sucesso'}, content_type='application/json')
 
 

@@ -14,3 +14,12 @@ class ValorObrigatorioException(Exception):
 
     def __init__(self, message=None):
         super(ValorObrigatorioException, self).__init__(message)
+
+
+class RegistroNaoEncontradoException(Exception):
+    """
+    Excecao para quando nao encontrar registro na base de dados
+    """
+
+    def __init__(self, message=None):
+        super(RegistroNaoEncontradoException, self).__init__(message)
