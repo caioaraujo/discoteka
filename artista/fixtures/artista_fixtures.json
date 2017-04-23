@@ -1,0 +1,26 @@
+[
+  {
+    "model": "artista.Artista",
+    "pk": 1,
+    "fields": {
+      "nome": "The Beatles",
+      "genero": "Rock"
+    }
+  },
+  {
+    "model": "artista.Artista",
+    "pk": 2,
+    "fields": {
+      "nome": "Pink Floyd",
+      "genero": "Rock"
+    }
+  },
+  {
+    "model": "artista.Artista",
+    "pk": 3,
+    "fields": {
+      "nome": "Chitãozinho & Xororó",
+      "genero": "Sertanejo"
+    }
+  }
+]
