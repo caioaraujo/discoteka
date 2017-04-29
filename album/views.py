@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -30,7 +29,11 @@ class Album(APIView):
         return Response(serializer.data)
 
     def get(self, request):
-        pass
+        albuns = AlbumModel.objects.filter(artista_id=request.GET.get('artista')).all()
+
+        serializer = AlbumSerializer(albuns, many=True)
+
+        return Response(serializer.data)
 
     def valida_artista(self, artista_id):
         artista = ArtistaModel.get_artista_por_id(pk=artista_id)
