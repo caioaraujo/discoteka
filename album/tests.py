@@ -1,7 +1,10 @@
+from unittest.mock import MagicMock
+
 from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from album.models import Album as AlbumModel
 from album.views import Album
 from discoteka.exceptions import RegistroNaoEncontradoException, ValorObrigatorioException
 
@@ -21,6 +24,16 @@ class UnitTests(TestCase):
         album = Album()
 
         self.assertIsNone(album.valida_artista(1))
+
+    def test_gera_codigo_gravadora(self):
+        album = AlbumModel()
+
+        # Metodo que sincroniza nao nos interessa nesse teste, entao será mockado para nao retornar nada
+        album.sincroniza = MagicMock(return_value=None)
+
+        codigo = album.gera_codigo_gravadora_e_sincroniza(album_id=1, artista_id=5)
+
+        self.assertEqual('15', codigo)
 
 
 class TestesIntegracao(APITestCase):

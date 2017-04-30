@@ -58,4 +58,11 @@ class Album(APIView):
 class AlbumId(APIView):
 
     def delete(self, request, pk):
-        pass
+        album = AlbumModel.get_album_por_id(pk=pk)
+
+        if not album:
+            raise RegistroNaoEncontradoException("Álbum não encontrado")
+
+        album.delete()
+
+        return Response({'message': 'Álbum removido com sucesso'}, content_type='application/json')

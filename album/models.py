@@ -15,3 +15,17 @@ class Album(models.Model):
 
     class Meta:
         db_table = 'album'
+
+    @staticmethod
+    def get_album_por_id(pk):
+        return Album.objects.filter(id=pk).first()
+
+    def gera_codigo_gravadora_e_sincroniza(self, album_id, artista_id):
+        codigo = str(album_id) + str(artista_id)
+
+        self.sincroniza(codigo)
+
+        return codigo
+
+    def sincroniza(self, codigo):
+        raise Exception('Não implementado')
